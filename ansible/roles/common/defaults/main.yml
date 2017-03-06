@@ -1,0 +1,12 @@
+hosts: [
+  { host_ip: "192.168.57.79", host_name: "vip-linux-sqlserver-01"},
+  { host_ip: "192.168.57.80", host_name: "vip-linux-sqlserver-02"}
+]
+
+obsolete_services:
+  - puppet
+  - chef-client
+
+centos_files: [
+     { src: "centos.sshd_config", dest: "/etc/ssh/sshd_config" }
+  ]

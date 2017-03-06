@@ -1,0 +1,25 @@
+- name: messagebus user is added to the root group
+  user:
+    name: messagebus
+    group: root
+  register: user_result
+  tags: [mssql]
+
+- name: microsoft/mssql-server-linux
+#  become: true
+#  become_user: messagebus
+  docker:   
+    privileged: yes
+    env:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Ude123@iisi
+      attach_dbs: "[{'dbName':'SampleDb','dbFiles':['/tmp/UTCS_Base_KS.mdf','/tmp/UTCS_Base_KS_log.ldf']}]"
+    image: microsoft/mssql-server-linux 
+    name: mssql
+    ports:  
+    - "1433:1433" 
+    volumes:
+      - /vagrant/tmp/:/tmp/
+  tags: [mssql]
+  # JDBC連線時,DB instance要填空白
+ 
