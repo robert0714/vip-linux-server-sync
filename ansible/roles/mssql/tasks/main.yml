@@ -13,7 +13,7 @@
     env:
       ACCEPT_EULA: Y
       SA_PASSWORD: Ude123@iisi
-      attach_dbs: "[{'dbName':'SampleDb','dbFiles':['/tmp/UTCS_Base_KS.mdf','/tmp/UTCS_Base_KS_log.ldf']}]"
+  #    attach_dbs: "[{'dbName':'SampleDb','dbFiles':['/tmp/UTCS_Base_KS.mdf','/tmp/UTCS_Base_KS_log.ldf']}]"
     image: microsoft/mssql-server-linux 
     name: mssql
     ports:  
