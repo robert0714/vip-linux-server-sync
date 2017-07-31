@@ -1,0 +1,36 @@
+- name: messagebus user is added to the root group
+  user:
+    name: messagebus
+    group: root
+  register: user_result
+  tags: [postgresql]
+
+- name: sameersbn-postgresql:9.5-4
+#  become: true
+#  become_user: messagebus
+  docker_container:
+#   restart_policy: always
+    privileged: yes
+    env:
+      DB_USER: admin
+      DB_PASS: postgres
+      DB_NAME: high_performance_java_persistence
+    image: sameersbn/postgresql:9.5-4
+#    image: 192.168.57.29:5000/postgresql:9.4-24
+    name: postgresql
+    ports: 
+#    - "49160:22"
+#    - "49161:80"
+    - "5432:5432"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#this is a issue "{{ postgresql_host_dir }}:/var/lib/postgresql"
+      - /data/postgresql:/var/lib/postgresql
+  tags: [postgresql]
+ 
+
+ 
+#docker run --name postgresql -itd --restart always \
+#  --env 'DB_USER=dbuser' --env 'DB_PASS=dbuserpass' \
+#  --env 'DB_NAME=dbname' -p  49162:5432  \
+#  192.168.57.29:5000/postgresql:9.4-24 

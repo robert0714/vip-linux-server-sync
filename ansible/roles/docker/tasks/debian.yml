@@ -53,7 +53,8 @@
   tags: [docker]
 
 - name: DockerUI is running
-  docker:
+  docker_container:
+    restart_policy: always
     image: uifd/ui-for-docker
     name: dockerui
     ports: 9000:9000

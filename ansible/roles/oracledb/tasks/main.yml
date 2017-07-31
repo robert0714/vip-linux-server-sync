@@ -1,0 +1,21 @@
+- name: OracleDBXE is running
+#  shell: docker run -d -p 49160:22 -p 49161:1521 -e ORACLE_ALLOW_REMOTE=true    -v /vagrant/oracle/data:/u01/app/oracle    wnameless/oracle-xe-11g:14.04.4 
+  docker:
+    name: oracledb
+    image: sath89/oracle-xe-11g
+    ports: 
+#    - "49162:8080"
+    - "1521:1521"
+#    - "49160:22"
+#    privileged: yes
+    env:
+      ORACLE_ALLOW_REMOTE: true
+      processes: 1000
+      sessions: 1105
+      transactions: 1215
+    volumes:
+      - /data/oracle/data:/u01/app/oracle
+      - /data/oracle/init/sh_sql_dmp_files:/docker-entrypoint-initdb.d
+  when: not skip_ui is defined
+  tags: [oracledb]
+
