@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
     default_router = "192.168.57.1"
     d.vm.provision :shell, inline: "ip route delete default 2>&1 >/dev/null || true; ip route add default via #{default_router}" 
     d.vm.provision :shell, path: "scripts/bootstrap4Ubuntu_ansible.sh"
-    d.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/mssql.yml -c local"
+    d.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/mysqldb.yml -c local"
     # sudo adduser  sa
     # sudo adduser sa docker
     #
@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
     default_router = "192.168.57.1"
     d.vm.provision :shell, inline: "ip route delete default 2>&1 >/dev/null || true; ip route add default via #{default_router}" 
     d.vm.provision :shell, path: "scripts/bootstrap4Ubuntu_ansible.sh"
-    d.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/mssql.yml -c local"
+    d.vm.provision :shell, inline: "PYTHONUNBUFFERED=1 ansible-playbook /vagrant/ansible/mysqldb.yml -c local"
     d.vm.provider "virtualbox" do |v|
       v.memory = 8192
       v.cpus = 2
